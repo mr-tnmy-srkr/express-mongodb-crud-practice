@@ -28,7 +28,13 @@ const handleDelete = (id)=>{
             {
                 updatedUser.map((user) =>(<div key={user._id}><h1>{user?.name || "demo-name"}</h1>
                 <br />
-                <button onClick={()=>handleDelete(user._id)} type="submit">Delete</button></div>))
+                <button onClick={()=>handleDelete(user._id)} type="submit">Delete</button>
+                <br />
+                <Link to={`/users/${user._id}`}>
+                    <button type="">Update</button>
+                </Link>
+                
+                </div>))
                
             }
         </div>

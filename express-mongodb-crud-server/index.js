@@ -35,16 +35,44 @@ async function run() {
 
     const userCollection = client.db("userDB").collection("users");
 
+    //getting multiple data
 
-       //getting multiple data
+    app.get("/users", async (req, res) => {
+      const result = await userCollection.find().toArray();
+      console.log(result);
+      res.send(result);
+    });
 
-       app.get("/users", async (req, res) => {
-        const result = await userCollection.find().toArray();
-        console.log(result);
-        res.send(result);
-      });
 
-      
+//find a document / getting single data for update
+app.get("/users/:id", async (req, res) => {
+  const id = req.params.id;
+  const query = {
+    _id: new ObjectId(id),
+  }
+  const result = await userCollection.findOne(query);
+  console.log(result);
+  res.send(result);
+})
+
+// update a document
+app.put("/users/:id", async (req, res) => {
+  const id = req.params.id;
+  const data = req.body;
+  console.log(id,data);
+  const filter = {_id: new ObjectId(id)};
+  const options = { upsert: true };
+  const updatedUser = {
+    $set: {
+     name: data.name,
+     email: data.email,
+     password: data.password,
+    },
+  };
+  const result = await userCollection.updateOne(filter, updatedUser, options);
+  res.send(result)
+})
+
     // post single data
     app.post("/users", async (req, res) => {
       const user = req.body;
@@ -53,20 +81,17 @@ async function run() {
       res.send(result);
     });
 
- //delete single users
-app.delete("/users/:id",async (req, res) => {
-  const id = req.params.id;
-  console.log("id",id);
-  const query = {
-    _id : new ObjectId(id),
-  };
-  const result =await userCollection.deleteOne(query)
-  console.log(result)
-  res.send(result);
-
-})
-
-
+    //delete single users
+    app.delete("/users/:id", async (req, res) => {
+      const id = req.params.id;
+      console.log("id", id);
+      const query = {
+        _id: new ObjectId(id),
+      };
+      const result = await userCollection.deleteOne(query);
+      console.log(result);
+      res.send(result);
+    });
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
