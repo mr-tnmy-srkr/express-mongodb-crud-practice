@@ -15,14 +15,16 @@ const router = createBrowserRouter([
   {
     path: "/users",
     element: <DisplayUser></DisplayUser>,
-    loader: () => fetch("http://localhost:5000/users"),
+    loader: () => fetch("https://express-mongodb-crud-server.vercel.app/users"),
   },
   {
     path: "/users/:id",
     element: <UpdateUser></UpdateUser>,
-    loader: ({params}) => {
+    loader: ({ params }) => {
       console.log(params);
-      return fetch(`http://localhost:5000/users/${params.id}`);
+      return fetch(
+        `https://express-mongodb-crud-server.vercel.app/users/${params.id}`
+      );
     },
   },
 ]);

@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 const PostUser = () => {
   const handlePostUser = async (e) => {
@@ -11,7 +11,7 @@ const PostUser = () => {
     const myData = { name, email, password };
     console.log(myData);
 
-    /* fetch("http://localhost:5000/users",{
+    /* fetch("https://express-mongodb-crud-server.vercel.app/users",{
     method: "POST", 
     headers: {
       "Content-Type": "application/json",
@@ -24,9 +24,9 @@ const PostUser = () => {
     })
     */
 
- /*    
+    /*    
  try {
-   const response = await fetch ("http://localhost:5000/users",{
+   const response = await fetch ("https://express-mongodb-crud-server.vercel.app/users",{
     method: "POST", 
     headers: {
       "Content-Type": "application/json",
@@ -41,19 +41,24 @@ const PostUser = () => {
     console.error(error);
     } */
 
- try {
-      const response = await axios.post("http://localhost:5000/users", myData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+    try {
+      const response = await axios.post(
+        "https://express-mongodb-crud-server.vercel.app/users",
+        myData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       console.log(response.data);
-      if(response.data.acknowledged){
-        alert('user added successfully')}
+      if (response.data.acknowledged) {
+        alert("user added successfully");
+      }
     } catch (error) {
       console.error(error);
     }
-  } 
+  };
 
   return (
     <div>

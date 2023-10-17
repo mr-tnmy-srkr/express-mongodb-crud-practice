@@ -16,7 +16,7 @@ const UpdateUser = () => {
     // console.log(name,email,password);
     const updateData = { name, email, password };
 
-    /* fetch(`http://localhost:5000/users/${singleData._id}`, {
+    /* fetch(`https://express-mongodb-crud-server.vercel.app/users/${singleData._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -28,14 +28,17 @@ const UpdateUser = () => {
         console.log(data);
       }); */
 
-      axios.put(`http://localhost:5000/users/${singleData._id}`, updateData)
-      .then(response => {
-        console.log('PUT request successful:', response.data);
+    axios
+      .put(
+        `https://express-mongodb-crud-server.vercel.app/users/${singleData._id}`,
+        updateData
+      )
+      .then((response) => {
+        console.log("PUT request successful:", response.data);
       })
-      .catch(error => {
-        console.error('Error making PUT request:', error);
+      .catch((error) => {
+        console.error("Error making PUT request:", error);
       });
-
   };
 
   return (

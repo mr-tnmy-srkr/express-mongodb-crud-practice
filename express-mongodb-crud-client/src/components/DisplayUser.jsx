@@ -9,7 +9,7 @@ const DisplayUser = () => {
   const handleDelete = (id) => {
     console.log(id);
 
-    /*   fetch(`http://localhost:5000/users/${id}`,{
+    /*   fetch(`https://express-mongodb-crud-server.vercel.app/users/${id}`,{
         method: 'DELETE'
     })
     .then(res=>res.json())
@@ -22,10 +22,10 @@ const DisplayUser = () => {
         setUpdatedUser(filteredUsers)
     }) */
     axios
-      .delete(`http://localhost:5000/users/${id}`)
-      .then(response => {
-        console.log('Delete request successful:', response.data);
-        
+      .delete(`https://express-mongodb-crud-server.vercel.app/users/${id}`)
+      .then((response) => {
+        console.log("Delete request successful:", response.data);
+
         if (response.data.deletedCount) {
           alert("user deleted successfully");
         }
