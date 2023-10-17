@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useLoaderData } from "react-router-dom";
 
 const UpdateUser = () => {
@@ -15,7 +16,7 @@ const UpdateUser = () => {
     // console.log(name,email,password);
     const updateData = { name, email, password };
 
-    fetch(`http://localhost:5000/users/${singleData._id}`, {
+    /* fetch(`http://localhost:5000/users/${singleData._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -25,7 +26,16 @@ const UpdateUser = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+      }); */
+
+      axios.put(`http://localhost:5000/users/${singleData._id}`, updateData)
+      .then(response => {
+        console.log('PUT request successful:', response.data);
+      })
+      .catch(error => {
+        console.error('Error making PUT request:', error);
       });
+
   };
 
   return (
